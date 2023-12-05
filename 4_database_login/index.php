@@ -19,11 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $enteredPassword = $_POST["password"];
 
     // Query to check user credentials
-    $query = "SELECT * FROM users WHERE username=:username AND password=:password";
-    $statement = $db->prepare($query);
-    $statement->bindValue(':username', $enteredUsername, SQLITE3_TEXT);
-    $statement->bindValue(':password', $enteredPassword, SQLITE3_TEXT);
-    $result = $statement->execute();
+    $query = "SELECT * FROM users WHERE username='" . $enteredUsername . "' AND password='" . $enteredPassword . "'";
+    $result = $db->query($query);
 
     // Check if the entered credentials are valid
     if ($row = $result->fetchArray()) {
