@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $enteredPassword = $_POST["password"];
 
     // Query to check user credentials
-    $query = "SELECT * FROM users WHERE username='" . $enteredUsername . "' AND password='" . $enteredPassword . "'";
+    $query = "SELECT * FROM users WHERE username='{$enteredUsername}' AND password='{$enteredPassword}' ";
     $result = $db->query($query);
 
     // Check if the entered credentials are valid
