@@ -1,3 +1,27 @@
+<?php
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get the entered username and password
+    $enteredUsername = $_POST["username"];
+    $enteredPassword = $_POST["password"];
+
+    // Replace the following with your actual username and password validation logic
+    $validUsername = "wiener";
+    $validPassword = "peter";
+
+    // Check if the entered credentials are valid
+    if ($enteredUsername == $validUsername && $enteredPassword == $validPassword) {
+        // Redirect to the login success page
+        header("Location: login-success.php");
+        exit();
+    } else {
+        // Invalid credentials, you might want to display an error message
+        $errorMessage = "Invalid username or password";
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,6 +116,13 @@
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <h2>Login</h2>
 
+            <?php
+            // Display error message if any
+            if (isset($errorMessage)) {
+                echo '<p style="color: red;">' . $errorMessage . '</p>';
+            }
+            ?>
+
             <label for="username">Username:</label>
             <input type="text" name="username" required>
 
@@ -103,6 +134,7 @@
 
         <h2>Welcome to Your Website hello</h2>
         <p>This is a sample content for your website.</p>
+        <img src="https://placekitten.com/200/200" alt="고양이 사진">
     </main>
 
     <footer>
