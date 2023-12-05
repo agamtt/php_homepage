@@ -1,34 +1,12 @@
 <?php
-session_start();
-// 사용자가 이미 로그인되어 있는지 확인
-if (isset($_SESSION["username"])) {
-    // 이미 로그인된 경우, login-success.php 페이지로 리디렉션
-    header("Location: login-success.php");
+
+// Check if the user is logged in
+if (!isset($_COOKIE["user"])) {
+    // If not logged in, redirect to the login page
+    header("Location: goback.php");
     exit();
 }
-// Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get the entered username and password
-    $enteredUsername = $_POST["username"];
-    $enteredPassword = $_POST["password"];
-
-    // Replace the following with your actual username and password validation logic
-    $validUsername = "grapehacker";
-    $validPassword = "secret1234";
-
-    // Check if the entered credentials are valid
-    if ($enteredUsername == $validUsername && $enteredPassword == $validPassword) {
-        // Redirect to the login success page
-        $_SESSION["username"] = $enteredUsername;
-        header("Location: login-success.php");
-        exit();
-    } else {
-        // Invalid credentials, you might want to display an error message
-        $errorMessage = "Invalid username or password";
-    }
-}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -118,31 +96,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <header>
         <h1>네이버</h1>
+        <a href="logout.php"><h1>Logout</h1></a>
     </header>
 
     <main>
-
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-
-        <?php
-            // Display error message if any
-            if (isset($errorMessage)) {
-                echo '<p style="color: red;">' . $errorMessage . '</p>';
-            }
-        ?>
-            <h2>Login</h2>
-
-            <label for="username">Username:</label>
-            <input type="text" name="username" required>
-
-            <label for="password">Password:</label>
-            <input type="password" name="password" required>
-
-            <input type="submit" value="Login">
-        </form>
-
         <h2>Welcome to Your Website hello</h2>
         <p>This is a sample content for your website.</p>
+        <img src="https://placekitten.com/200/200" alt="고양이 사진">
     </main>
 
     <footer>

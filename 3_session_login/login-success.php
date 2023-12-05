@@ -97,6 +97,8 @@ if (!isset($_SESSION["username"])) {
 
     <header>
         <h1>네이버</h1>
+        <h1>Welcome, <?php echo htmlspecialchars($_SESSION["username"]); ?>!</h1>
+        <a href="logout.php"><h1>Logout</h1></a>
     </header>
 
     <main>

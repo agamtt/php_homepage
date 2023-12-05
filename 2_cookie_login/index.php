@@ -1,11 +1,6 @@
 <?php
-session_start();
-// 사용자가 이미 로그인되어 있는지 확인
-if (isset($_SESSION["username"])) {
-    // 이미 로그인된 경우, login-success.php 페이지로 리디렉션
-    header("Location: login-success.php");
-    exit();
-}
+
+
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get the entered username and password
@@ -19,9 +14,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if the entered credentials are valid
     if ($enteredUsername == $validUsername && $enteredPassword == $validPassword) {
         // Redirect to the login success page
-        $_SESSION["username"] = $enteredUsername;
+
+        // 쿠키 설정
+        setcookie("user", "John Doe", time() + 3600, "/");
+
+        // 쿠키가 설정되었는지 확인
+        if (isset($_COOKIE["user"])) {
+            echo "쿠키 'user'의 값: " . $_COOKIE[$validUsername];
+        } else {
+            echo "쿠키가 설정되지 않았습니다.";
+        }
         header("Location: login-success.php");
         exit();
+
     } else {
         // Invalid credentials, you might want to display an error message
         $errorMessage = "Invalid username or password";
