@@ -1,10 +1,11 @@
 <?php
+session_save_path('./');
 session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION["username"])) {
     // If not logged in, redirect to the login page
-    header("Location: index.php");
+    header("Location: goback.php");
     exit();
 }
 ?>
@@ -102,8 +103,7 @@ if (!isset($_SESSION["username"])) {
     </header>
 
     <main>
-        <h2>Welcome to Your Website hello</h2>
-        <p>This is a sample content for your website.</p>
+        <h2>Here is Cat!</h2>
         <img src="https://placekitten.com/200/200" alt="고양이 사진">
     </main>
 
