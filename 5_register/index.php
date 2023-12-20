@@ -3,7 +3,12 @@ session_save_path('./');
 session_start();
 
 // SQLite 데이터베이스 연결
-$db = new SQLite3('cat_homepage.db');
+try {
+    $db = new SQLite3('cat_homepage.db');
+} catch (Exception $e) {
+    // Handle database connection error
+    die("Database connection failed: " . $e->getMessage());
+}
 
 // 사용자가 이미 로그인되어 있는지 확인
 if (isset($_SESSION["username"])) {

@@ -131,7 +131,9 @@ $db->close();
         <label for="password">Password:</label><br>
         <input type="password" id="password" name="password" required><br>
 
-        <input type="submit" value="Register">
+        <input type="submit" value="가입">
+        <a href="index.php" class="button">뒤로가기</a>
+
     </form>
 </body>
 </html>
