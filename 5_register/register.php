@@ -116,7 +116,7 @@ $db->close();
 </head>
 <body>
 
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <form method="post">
         <?php
             // Display error message if any
             if (isset($registerMessage)) {
