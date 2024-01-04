@@ -3,7 +3,7 @@
     $db = new SQLite3('cat_homepage.db');
 
     // Query to check user credentials
-    $query = "SELECT * FROM users WHERE username='grapehacker' AND password='secret1234' ";
+    $query = "SELECT * FROM users WHERE username='john_doe' AND password='password123' ";
     $result = $db->query($query);
 
     // Check if the entered credentials are valid
