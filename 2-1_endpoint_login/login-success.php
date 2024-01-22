@@ -1,26 +1,9 @@
 <?php
-// Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get the entered username and password
-    $enteredUsername = $_POST["username"];
-    $enteredPassword = $_POST["password"];
-
-    // Replace the following with your actual username and password validation logic
-    $validUsername = "wiener";
-    $validPassword = "peter";
-
-    // Check if the entered credentials are valid
-    if ($enteredUsername == $validUsername && $enteredPassword == $validPassword) {
-        // Redirect to the login success page
-        header("Location: login-success.php");
-        exit();
-    } else {
-        // Invalid credentials, you might want to display an error message
-        $errorMessage = "Invalid username or password";
-    }
+if (!isset($_COOKIE["user"])) {
+    header("Location: goback.php");
+    exit();
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -109,32 +92,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
     <header>
-        <h1>네이버</h1>
+        <h1>개인 페이지</h1>
+        <a href="logout.php"><h1>Logout</h1></a>
     </header>
 
     <main>
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-            <h2>Login</h2>
-
-            <?php
-            // Display error message if any
-            if (isset($errorMessage)) {
-                echo '<p style="color: red;">' . $errorMessage . '</p>';
-            }
-            ?>
-
-            <label for="username">Username:</label>
-            <input type="text" name="username" required>
-
-            <label for="password">Password:</label>
-            <input type="password" name="password" required>
-
-            <input type="submit" value="Login">
-        </form>
-
-        <h2>Welcome to Your Website hello</h2>
-        <p>This is a sample content for your website.</p>
+        <h2>안녕하세요 당신의 개인페이지입니다.</h2>
         <img src="https://placekitten.com/200/200" alt="고양이 사진">
+        <h3><나의 고양이> </h3>
+        <h3>전화번호 : 010-1234-1234<h3>
+        <h3>계좌번호 : 12341234<h3>    
     </main>
 
     <footer>

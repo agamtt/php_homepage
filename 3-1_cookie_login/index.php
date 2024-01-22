@@ -1,12 +1,31 @@
 <?php
 
-// Check if the user is logged in
-if (!isset($_COOKIE["user"])) {
-    // If not logged in, redirect to the login page
-    header("Location: goback.php");
-    exit();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $enteredUsername = $_POST["username"];
+    $enteredPassword = $_POST["password"];
+
+    $validUsername = "grapehacker";
+    $validPassword = "secret1234";
+
+    if ($enteredUsername == $validUsername && $enteredPassword == $validPassword) {
+
+        setcookie("user", "grapehacker_cookie", time() + 3600, "/");
+
+        if (isset($_COOKIE["user"])) {
+            echo "쿠키 'user'의 값: " . $_COOKIE[$validUsername];
+        } else {
+            echo "쿠키가 설정되지 않았습니다.";
+        }
+        header("Location: login-success.php");
+        exit();
+
+    } else {
+        $errorMessage = "Invalid username or password";
+    }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +45,7 @@ if (!isset($_COOKIE["user"])) {
         }
 
         header {
-            background-color: #333;
+            background-color: #DE628B;
             color: #fff;
             text-align: center;
             padding: 10px;
@@ -62,7 +81,7 @@ if (!isset($_COOKIE["user"])) {
         }
 
         input[type="submit"] {
-            background-color: #333;
+            background-color: #DE628B;
             color: #fff;
             cursor: pointer;
             padding: 12px;
@@ -76,7 +95,7 @@ if (!isset($_COOKIE["user"])) {
         }
 
         footer, nav {
-            background-color: #333;
+            background-color: #DE628B;
             color: #fff;
             text-align: center;
             padding: 10px;
@@ -95,14 +114,32 @@ if (!isset($_COOKIE["user"])) {
 <body>
 
     <header>
-        <h1>네이버</h1>
-        <a href="logout.php"><h1>Logout</h1></a>
+        <h1>GRAPE 고양이 웹</h1>
     </header>
 
     <main>
+
+        <form method="post">
+
+        <?php
+            // Display error message if any
+            if (isset($errorMessage)) {
+                echo '<p style="color: red;">' . $errorMessage . '</p>';
+            }
+        ?>
+            <h2>Login</h2>
+
+            <label for="username">Username:</label>
+            <input type="text" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+
+            <input type="submit" value="Login">
+        </form>
+
         <h2>Welcome to Your Website hello</h2>
         <p>This is a sample content for your website.</p>
-        <img src="https://placekitten.com/200/200" alt="고양이 사진">
     </main>
 
     <footer>

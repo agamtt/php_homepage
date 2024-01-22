@@ -1,3 +1,32 @@
+<?php
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $enteredUsername = $_POST["username"];
+    $enteredPassword = $_POST["password"];
+
+    $validUsername = "grapeuser";
+    $validPassword = "secret1234";
+
+    if ($enteredUsername == $validUsername and $enteredPassword == $validPassword) {
+
+	setcookie("user", "grapehacker_cookie", time() + 3600, "/");
+
+	if (!isset($_COOKIE["user"])) {
+            echo "Cookie Value 'user': " . $_COOKIE[$validUsername];
+        } else {
+            echo "there is no cookie!";
+        }
+
+        header("Location: login-success.php");
+        exit();
+    } else {
+        $errorMessage = "Invalid username or password";
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +45,7 @@
         }
 
         header {
-            background-color: #333;
+            background-color: #DE628B;
             color: #fff;
             text-align: center;
             padding: 10px;
@@ -52,7 +81,7 @@
         }
 
         input[type="submit"] {
-            background-color: #333;
+            background-color: #DE628B;
             color: #fff;
             cursor: pointer;
             padding: 12px;
@@ -66,7 +95,7 @@
         }
 
         footer, nav {
-            background-color: #333;
+            background-color: #DE628B;
             color: #fff;
             text-align: center;
             padding: 10px;
@@ -85,13 +114,30 @@
 <body>
 
     <header>
-        <h1>네이버</h1>
+        <h1>GRAPE 고양이 웹</h1>
     </header>
 
     <main>
+
+        <form method="post">
+            <h2>Login</h2>
+	<?php
+            // Display error message if any
+            if (isset($errorMessage)) {
+                echo '<p style="color: red;">' . $errorMessage . '</p>';
+            }
+	?>	
+            <label for="username">Username:</label>
+            <input type="text" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+
+            <input type="submit" value="Login">
+        </form>
+        <a href="/login-success.php">개인페이지로 이동</a>
         <h2>Welcome to Your Website hello</h2>
         <p>This is a sample content for your website.</p>
-        <img src="https://placekitten.com/200/200" alt="고양이 사진">
     </main>
 
     <footer>
