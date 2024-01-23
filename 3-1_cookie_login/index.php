@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $enteredUsername = $_POST["username"];
     $enteredPassword = $_POST["password"];
 
-    $validUsername = "grapehacker";
+    $validUsername = "grapeuser";
     $validPassword = "secret1234";
 
     if ($enteredUsername == $validUsername && $enteredPassword == $validPassword) {
